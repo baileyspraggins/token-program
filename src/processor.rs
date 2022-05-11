@@ -55,7 +55,7 @@ impl Processor {
                 //get account info for master token account and token account to mint to
                 let token_account_acct = next_account_info(accounts_iter)?;
                 let token_master_account = next_account_info(accounts_iter)?;
-                let mut token_account = TokenAccount(token_account_acct)?;
+                let mut token_account = TokenAccount::load(token_account_acct)?;
                 let mut token = Token::load(token_master_account)?;
 
                 //basic validation, ensure its the master token authority trying to mint
@@ -77,7 +77,7 @@ impl Processor {
                 msg!("Instruction: Transfer");
 
                 //get account info for from and to token accounts, as well as master token account
-                let from_token_acct = next_account_info(account_iter)?;
+                let from_token_acct = next_account_info(accounts_iter)?;
                 let to_token_acct = next_account_info(accounts_iter)?;
                 let owner = next_account_info(accounts_iter)?;
                 let mut src_token_account = TokenAccount::load(from_token_acct)?;
@@ -96,7 +96,7 @@ impl Processor {
                 }
 
                 //ensure the owner passed in is the accual owner of the token account
-                If !(src_token_account.owner == *owner.key) {
+                if !(src_token_account.owner == *owner.key) {
                     msg!("Not the token account owner signing the transaction");
                     return Err(ProgramError::MissingRequiredSignature);
                 }
@@ -106,7 +106,6 @@ impl Processor {
                 dst_token_account.amount += amount;
                 src_token_account.save(from_token_acct)?;
                 dst_token_account.save(to_token_acct)?;
-
             }
         }
         Ok(())

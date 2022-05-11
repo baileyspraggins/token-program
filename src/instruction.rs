@@ -1,5 +1,6 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 
+// Defines what the instruction is that gets called from the client app.
 #[derive(BorshDeserialize, BorshSerialize, Debug, Clone)]
 pub enum TokenInstruction {
     CreateToken,

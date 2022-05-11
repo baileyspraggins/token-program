@@ -1,8 +1,6 @@
 use borsh::{BorshDeserialize, BorshSerialize};
 use solana_program::{
-    account_info::{Account, AccountInfo},
-    entrypoint::ProgramResult,
-    program_error::ProgramError,
+    account_info::AccountInfo, entrypoint::ProgramResult, program_error::ProgramError,
     pubkey::Pubkey,
 };
 
@@ -20,7 +18,7 @@ impl Token {
     pub fn save(&self, ai: &AccountInfo) -> ProgramResult {
         Ok(self.serialize(&mut *ai.data.borrow_mut())?)
     }
-    pub fn laod(ai: &AccountInfo) -> Result<Self, ProgramError> {
+    pub fn load(ai: &AccountInfo) -> Result<Self, ProgramError> {
         let token = Self::try_from_slice(&ai.data.borrow())?;
         Ok(token)
     }
