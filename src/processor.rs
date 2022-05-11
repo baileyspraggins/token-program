@@ -63,15 +63,15 @@ impl Processor {
                 if !token_authority.is_signer {
                     msg!("Only the token owner can mint tokens");
                     return Err(ProgramError::MissingRequiredSignature);
-
-                    //update total supply of the master toekn, and update balance of token account that received the mint
-                    token.supply += amount;
-                    token_account.amount += amount;
-
-                    // Save updated contents of both accounts
-                    token_account.save(token_account_acct)?;
-                    token.save(token_master_account)?;
                 }
+
+                //update total supply of the master toekn, and update balance of token account that received the mint
+                token.supply += amount;
+                token_account.amount += amount;
+
+                // Save updated contents of both accounts
+                token_account.save(token_account_acct)?;
+                token.save(token_master_account)?;
             }
             TokenInstruction::Transfer { amount } => {
                 msg!("Instruction: Transfer");
