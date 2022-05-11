@@ -19,7 +19,7 @@ Simple version of an SPL Token Program
     - Mint { amount: u64 }
         - Creates coins and sends them to the authority token account.
     - Transfer { amount: u64 }
-        - Transfers 5 coins from the authority token account to the other token account
+        - Transfers 5 coins from the authority token account to the other token account.
 
 ## Concepts Used
 
