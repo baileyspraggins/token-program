@@ -57,7 +57,7 @@ import {
  */
  const PROGRAM_KEYPAIR_PATH = path.join(PROGRAM_PATH, 'token_program-keypair.json');
  
- const TOKEN_NAME = 'COOKIE_COIN'
+ const TOKEN_NAME = ''
  const FROM_ACCT_SEED='FROM_ACCT_SEED'
  const TO_ACCT_SEED='TO_ACCT_SEED'
  
